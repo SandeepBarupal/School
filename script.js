@@ -2,6 +2,7 @@ const root = document.documentElement;
 const loadingScreen = document.querySelector('.loading-screen');
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const navToggle = document.querySelector('.menu-toggle');
+const drawer = document.querySelector('.drawer');
 const navLinks = document.querySelector('.nav-links');
 const faqItems = document.querySelectorAll('.faq-item');
 const backToTop = document.querySelector('.back-to-top');
@@ -44,6 +45,11 @@ function revealOnScroll() {
     if (top < window.innerHeight - 70) item.classList.add('active');
   });
 }
+
+// initial reveal for hero and key elements
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(revealOnScroll, 120);
+});
 
 function setupFaq() {
   faqItems.forEach((item) => {
@@ -131,11 +137,14 @@ function setupGalleryModal() {
 }
 
 navToggle?.addEventListener('click', () => {
-  navLinks?.classList.toggle('open');
+  if (!drawer) return;
+  const isHidden = drawer.getAttribute('aria-hidden') === 'true';
+  drawer.setAttribute('aria-hidden', isHidden ? 'false' : 'true');
+  if (isHidden) drawer.querySelector('a')?.focus();
 });
 
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 760) navLinks?.classList.remove('open');
+  if (window.innerWidth > 760) drawer?.setAttribute('aria-hidden', 'true');
 });
 
 initTheme();
