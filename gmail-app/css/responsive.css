@@ -1,0 +1,269 @@
+/* ========================================================================
+   CloudMail - Responsive Styles (Tablet & Mobile)
+   ======================================================================== */
+
+/* ===== Tablet (768px - 1024px) ===== */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 72px;
+  }
+
+  #sidebar {
+    width: var(--sidebar-collapsed-width);
+  }
+  #sidebar .compose-text,
+  #sidebar .nav-label,
+  #sidebar .nav-count,
+  #sidebar .sidebar-section-header span,
+  #sidebar .sidebar-section-actions,
+  #sidebar .sidebar-footer,
+  #sidebar .label-dot-name { display: none; }
+  #sidebar .compose-button {
+    width: 56px; padding: 0; justify-content: center;
+    border-radius: 50%; min-height: 56px;
+  }
+  #sidebar .nav-item {
+    padding: 0 0 0 24px; justify-content: flex-start;
+  }
+  #sidebar .nav-item .nav-icon { margin-right: 0; }
+
+  .header-left { min-width: auto; }
+  .logo-text { display: none; }
+
+  .email-sender { width: 140px; }
+  .email-snippet { display: none; }
+  .email-snippet-sep { display: none; }
+
+  #right-panel { display: none; }
+  #right-panel-content { display: none !important; }
+
+  .contacts-sidebar { width: 56px; padding: 16px 4px; }
+  .contacts-sidebar-item span { display: none; }
+  .contacts-sidebar-item { padding: 8px 16px; justify-content: center; }
+  .contacts-sidebar-section { display: none; }
+
+  .settings-tabs { flex-wrap: nowrap; overflow-x: auto; }
+  .settings-row { flex-direction: column; }
+  .settings-row-label { width: 100%; }
+
+  .shortcuts-dialog { width: 90vw; }
+
+  .compose-window {
+    width: 420px; right: 16px;
+  }
+}
+
+/* ===== Mobile (< 768px) ===== */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 56px;
+  }
+
+  #app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  /* Header */
+  #app-header { padding: 0 8px; }
+  .header-left { min-width: auto; gap: 0; }
+  .logo-link { display: none; }
+  .header-center { padding: 0 8px; }
+  .search-container { height: 40px; }
+  .header-right { gap: 0; }
+  #help-btn, #apps-btn { display: none; }
+
+  /* Sidebar - slide out drawer */
+  #sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0;
+    width: 280px; z-index: var(--z-sidebar);
+    transform: translateX(-100%);
+    transition: transform var(--transition-sidebar);
+    background: var(--sidebar-bg);
+    box-shadow: none;
+  }
+  #sidebar.sidebar-mobile-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-2xl);
+  }
+  #sidebar.sidebar-mobile-open .compose-text,
+  #sidebar.sidebar-mobile-open .nav-label,
+  #sidebar.sidebar-mobile-open .nav-count,
+  #sidebar.sidebar-mobile-open .sidebar-section-header span,
+  #sidebar.sidebar-mobile-open .sidebar-section-actions,
+  #sidebar.sidebar-mobile-open .sidebar-footer,
+  #sidebar.sidebar-mobile-open .label-dot-name { display: initial; }
+  #sidebar.sidebar-mobile-open .compose-button {
+    width: auto; padding: 0 24px; justify-content: flex-start;
+    border-radius: var(--radius-lg); min-height: 56px;
+  }
+  #sidebar.sidebar-mobile-open .nav-item {
+    padding: 0 12px 0 24px;
+  }
+  #sidebar.sidebar-mobile-open .nav-item .nav-icon { margin-right: 16px; }
+
+  #sidebar-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: var(--bg-overlay);
+    z-index: calc(var(--z-sidebar) - 1);
+  }
+  #sidebar.sidebar-mobile-open ~ #sidebar-overlay { display: block; }
+
+  /* Main Content */
+  #main-content { border-radius: 0; }
+  #right-panel { display: none; }
+
+  /* Email List */
+  .email-content { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .email-sender { width: 100%; font-size: 14px; }
+  .email-subject-snippet { width: 100%; }
+  .email-subject { max-width: 60%; font-size: 13px; }
+  .email-snippet { font-size: 12px; }
+  .email-row { padding: 8px 12px 8px 4px; min-height: 64px; }
+  .email-important { display: none; }
+  .email-hover-actions { display: none !important; }
+  .email-row:hover .email-date { display: block; }
+  .email-labels { display: none; }
+
+  /* Category Tabs */
+  .category-tabs { padding: 0 8px; overflow-x: auto; }
+  .category-tab { padding: 10px 12px; font-size: 12px; }
+  .category-tab span.cat-text { display: none; }
+
+  /* Thread View */
+  .thread-view { padding: 0 12px; }
+  .thread-subject { font-size: var(--fs-lg); }
+  .thread-msg-header { padding: 12px; }
+  .thread-msg-body { padding: 0 12px 12px 12px; }
+  .thread-attachments { padding: 8px 12px; }
+  .thread-msg-footer { padding: 8px 12px; }
+
+  /* Compose */
+  .compose-window {
+    position: fixed; inset: 0;
+    width: 100vw; height: 100vh;
+    border-radius: 0; right: 0;
+    min-width: 0; min-height: 0;
+  }
+  .compose-window.minimized {
+    width: 100vw; height: 44px; top: auto; bottom: 0;
+  }
+
+  /* Settings */
+  .settings-page { padding: 0; }
+  .settings-tabs { padding: 0 8px; }
+  .settings-tab { padding: 10px 12px; font-size: 12px; }
+  .settings-content { padding: 16px; }
+  .settings-row { flex-direction: column; gap: 8px; }
+  .settings-row-label { width: 100%; }
+
+  /* Contacts */
+  .contacts-page { flex-direction: column; }
+  .contacts-sidebar {
+    width: 100%; border-right: none; border-bottom: 1px solid var(--border-color-light);
+    display: flex; overflow-x: auto; padding: 0;
+  }
+  .contacts-sidebar-item { padding: 12px 16px; white-space: nowrap; }
+  .contacts-sidebar-section { display: none; }
+  .contacts-main { flex: 1; }
+  .contacts-header { flex-direction: column; gap: 12px; align-items: stretch; padding: 12px 16px; }
+  .contacts-search { width: 100%; }
+  .contact-row { padding: 12px 16px; }
+  .contact-phone { display: none; }
+
+  .contact-detail { padding: 16px; }
+  .contact-detail-header { flex-direction: column; text-align: center; }
+
+  /* Auth */
+  .auth-card { padding: 24px; max-width: 100%; margin: 0 16px; }
+  .auth-title { font-size: var(--fs-xl); }
+  .auth-logo .material-icons-outlined { font-size: 32px; }
+  .auth-logo span { font-size: 22px; }
+
+  /* Modals */
+  #modal-dialog { max-width: 100%; margin: 16px; border-radius: var(--radius-sm); }
+  .modal-header { padding: 16px; }
+  .modal-body { padding: 12px 16px; }
+  .modal-footer { padding: 12px 16px; }
+
+  /* Help */
+  .help-page { padding: 16px; }
+  .help-categories { grid-template-columns: 1fr 1fr; }
+
+  /* Quick Settings */
+  #quick-settings-panel { width: 100%; }
+
+  /* Context Menu */
+  #context-menu { max-width: calc(100vw - 32px); }
+
+  /* Shortcuts */
+  .shortcuts-dialog { width: 95vw; max-height: 90vh; }
+
+  /* Account Menu */
+  #account-menu { right: 8px; left: 8px; width: auto; }
+
+  /* Pagination */
+  .pagination { padding: 8px 12px; }
+
+  /* Advanced Search */
+  .advanced-search-row { flex-direction: column; align-items: stretch; }
+  .advanced-search-row label { width: auto; text-align: left; }
+
+  /* Toast */
+  #toast-container { left: 8px; right: 8px; bottom: 8px; }
+  .toast { min-width: auto; }
+
+  /* Schedule */
+  .schedule-options { grid-template-columns: 1fr; }
+}
+
+/* ===== Small Mobile (< 480px) ===== */
+@media (max-width: 480px) {
+  .email-checkbox { width: 32px; }
+  .email-star { width: 28px; }
+  .email-content { padding: 0 4px; }
+
+  .toolbar-left .icon-btn:not(:first-child):not(:nth-child(2)) { display: none; }
+  .toolbar-divider { display: none; }
+
+  .compose-field-label { width: 36px; font-size: 12px; }
+  .compose-formatting-toolbar { overflow-x: auto; flex-wrap: nowrap; }
+
+  .auth-card { padding: 20px 16px; }
+
+  .help-categories { grid-template-columns: 1fr; }
+  .contact-company { display: none; }
+}
+
+/* ===== Animations & Transitions ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Focus Styles (Accessibility) ===== */
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ===== High Contrast Mode ===== */
+@media (forced-colors: active) {
+  .compose-button, .btn-primary, .compose-send-btn {
+    border: 1px solid ButtonText;
+  }
+  .nav-item.active { border: 2px solid Highlight; }
+  .email-row.selected { border: 2px solid Highlight; }
+}
